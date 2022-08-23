@@ -28,7 +28,7 @@ func GetClient(ipClient string) *geoip2.Country {
 	return record
 }
 
-func LogFile(content, from, test string) {
+func LogFile(content, from, test string, dir string) {
 	var testName string
 	if test == "1" {
 		testName = "test"
@@ -36,8 +36,14 @@ func LogFile(content, from, test string) {
 		testName = "release"
 	}
 
+	fromMap := map[string]int{"web": 1, "app": 1}
+
 	d := time.Now().Format("20060102")
-	filePath := from + "/" + testName + "/" + d + ".log"
+	filePath := dir + "/" + from + "/ob/" + d + ".log"
+	if fromMap[from] == 1 {
+		filePath = dir + "/" + from + "/ob/" + testName + "/" + d + ".log"
+	}
+
 	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666)
 	if err != nil {
 		fmt.Println("文件打开失败", err)

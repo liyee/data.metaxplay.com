@@ -3,13 +3,13 @@ package initialize
 import (
 	"flag"
 	"fmt"
-	"gin-admin/common"
+	"os"
+
+	"data.metaxplay.com/common"
+
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
-	"os"
 )
-
-
 
 func InitConf(path ...string) {
 

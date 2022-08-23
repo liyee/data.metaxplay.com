@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"time"
 
+	"data.metaxplay.com/common"
 	"data.metaxplay.com/help"
+	"data.metaxplay.com/initialize"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,12 +28,19 @@ func main() {
 
 		buf := help.Regroup(data)
 		ip := c.ClientIP()
-		buf["geo"] = help.GetClient(ip)
+
+		// geoInfo = help.GetClient(ip)
+		geoInfo := help.GetClient("117.186.149.214")
+
+		buf["country_iso_code"] = geoInfo.Country.IsoCode
+		buf["country_name_en"] = geoInfo.Country.Names["en"]
+		buf["ip_address"] = ip
 		buf["test"] = test
 		buf["receive_time"] = time.Now().Format("2006-01-02 15:04:05")
 
 		log, _ := json.Marshal(buf)
-		help.LogFile(string(log), from, test)
+		dir := common.CONFIG.System.Dir
+		help.LogFile(string(log), from, test, dir)
 
 		c.JSON(200, gin.H{
 			"code": 0,
@@ -39,7 +48,7 @@ func main() {
 			"data": "",
 		})
 	})
-	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+	r.Run(":" + common.CONFIG.System.Port) // 监听并在 0.0.0.0:8080 上启动服务
 }
 
 func init() {
