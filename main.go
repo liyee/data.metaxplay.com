@@ -14,6 +14,13 @@ import (
 func main() {
 	r := gin.Default()
 	r.Use(middleware.Cors())
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "succeed",
+			"data": "",
+		})
+	})
 	r.POST("/ob", func(c *gin.Context) {
 		data := c.PostForm("data")
 		from := c.PostForm("from")
