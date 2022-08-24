@@ -9,11 +9,13 @@ import (
 	"os"
 	"time"
 
+	"data.metaxplay.com/common"
 	"github.com/oschwald/geoip2-golang"
 )
 
 func GetClient(ipClient string) *geoip2.Country {
-	db, err := geoip2.Open("GeoLite2-Country.mmdb")
+
+	db, err := geoip2.Open(common.CONFIG.System.GeoDir + "/GeoLite2-Country.mmdb")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,7 +40,7 @@ func LogFile(content, from, test string, dir string) {
 
 	fromMap := map[string]int{"web": 1, "app": 1}
 
-	d := time.Now().Format("20060102")
+	d := time.Now().Format("2006010215")
 	filePath := dir + "/" + from + "/ob/" + d + ".log"
 	if fromMap[from] == 1 {
 		filePath = dir + "/" + from + "/ob/" + testName + "/" + d + ".log"

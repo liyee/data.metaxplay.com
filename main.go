@@ -30,7 +30,7 @@ func main() {
 		ip := c.ClientIP()
 
 		// geoInfo = help.GetClient(ip)
-		geoInfo := help.GetClient("117.186.149.214")
+		geoInfo := help.GetClient(ip)
 
 		buf["country_iso_code"] = geoInfo.Country.IsoCode
 		buf["country_name_en"] = geoInfo.Country.Names["en"]

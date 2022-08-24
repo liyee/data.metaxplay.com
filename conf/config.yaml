@@ -1,3 +1,5 @@
 system:
-  port: '8080'
-  dir: 'D:\go\data.metaxplay.com\log'
+  port: '9096'
+  dir: '/data/www/log'
+  geoDir: '/data/www/geoip'
+  env: 'product'

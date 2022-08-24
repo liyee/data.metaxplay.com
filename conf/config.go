@@ -5,6 +5,8 @@ type Config struct {
 }
 
 type System struct {
-	Port string `mapstructure:"port" json:"port" yaml:"port"`
-	Dir  string `mapstructure:"dir" json:"dir" yaml:"dir"`
+	Port   string `mapstructure:"port" json:"port" yaml:"port"`
+	Dir    string `mapstructure:"dir" json:"dir" yaml:"dir"`
+	GeoDir string `mapstructure:"GeoDir" json:"GeoDir" yaml:"GeoDir"`
+	Env    string `mapstructure:"env" json:"env" yaml:"env"`
 }

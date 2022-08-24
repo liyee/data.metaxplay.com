@@ -1,0 +1,5 @@
+system:
+  port: '9096'
+  dir: 'D:\go\data.metaxplay.com\log'
+  geoDir: 'D:\go\data.metaxplay.com'
+  env: 'develop'
