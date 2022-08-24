@@ -7,11 +7,13 @@ import (
 	"data.metaxplay.com/common"
 	"data.metaxplay.com/help"
 	"data.metaxplay.com/initialize"
+	"data.metaxplay.com/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
+	r.Use(middleware.Cors())
 	r.POST("/ob", func(c *gin.Context) {
 		data := c.PostForm("data")
 		from := c.PostForm("from")
