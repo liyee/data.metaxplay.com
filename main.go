@@ -21,10 +21,11 @@ func main() {
 			"data": "",
 		})
 	})
-	r.POST("/ob", func(c *gin.Context) {
+	r.POST("/:project", func(c *gin.Context) {
 		data := c.PostForm("data")
 		from := c.PostForm("from")
 		test := c.PostForm("test")
+		project := c.Param("project")
 
 		if data == "" {
 			c.JSON(200, gin.H{
@@ -49,7 +50,7 @@ func main() {
 
 		log, _ := json.Marshal(buf)
 		dir := common.CONFIG.System.Dir
-		help.LogFile(string(log), from, test, dir)
+		help.LogFile(string(log), from, test, dir, project)
 
 		c.JSON(200, gin.H{
 			"code": 0,
